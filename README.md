@@ -3,10 +3,10 @@
 Eleven colleagues. Fixed amount on the same day each week. One member receives the pot in turn. Weekly collection runs while members are offline, app closed, phone off.
 
 ## Live Demo
-🌐 **Deployed (Vercel):** https://road-to-devcon-iii-problem3-41i41lts4-sadiyamulani03s-projects.vercel.app
-> Latest production (`a492b7e`) — auto-deploys on `main`. Redeployed now: previous `Application error: client-side exception` is fixed (`5d00cfb` adds `ErrorBoundary` + fallback banner for missing `NEXT_PUBLIC_PRIVY_APP_ID`). Earlier `o44xrsnrc` (`0f5407f`) was valid, new `41i41lts4` (`a492b7e`) is current. If you see Vercel login, disable **Deployment Protection** in Vercel → Project → Settings → Deployment Protection → Vercel Authentication (off) to make demo public.
+🌐 **Deployed (Vercel):** https://road-to-devcon-iii-problem3-l2iyevtxb-sadiyamulani03s-projects.vercel.app
+> Latest production (`b9704ad`) — **fixes `Application error: client-side exception` on `road-to-devcon-iii-problem3.vercel.app`** (previous `o44xrsnrc`/`41i41lts4` crashed when `NEXT_PUBLIC_PRIVY_APP_ID` was missing; now `src/app/providers.tsx` bypasses `PrivyProvider` and `src/components/JoinCircle.tsx` renders static demo with policy preview instead of calling `usePrivy`/`useDelegatedActions`). Auto-deploys on `main`. If you see Vercel login, disable **Deployment Protection** in Vercel → Project → Settings → Deployment Protection → Vercel Authentication (off) to make demo public.
 >
-> **Vercel env vars required for full joining:** `NEXT_PUBLIC_PRIVY_APP_ID`, `PRIVY_APP_SECRET`, `PRIVY_AUTHORIZATION_PRIVATE_KEY` / `PRIVY_AUTHORIZATION_KEY_ID`, `NEXT_PUBLIC_CONTRIBUTION_CONTRACT`, `NEXT_PUBLIC_BASE_SEPOLIA_RPC`. Copy from `.env.example` → Vercel → Settings → Environment Variables and redeploy. Without them the app shows a non-crashing banner and policy/cron code remains reviewable.
+> **Vercel env vars required for full joining:** `NEXT_PUBLIC_PRIVY_APP_ID`, `PRIVY_APP_SECRET`, `PRIVY_AUTHORIZATION_PRIVATE_KEY` / `PRIVY_AUTHORIZATION_KEY_ID`, `NEXT_PUBLIC_CONTRIBUTION_CONTRACT`, `NEXT_PUBLIC_BASE_SEPOLIA_RPC`. Copy from `.env.example` → Vercel → Settings → Environment Variables and redeploy. Without them the app shows a non-crashing static banner and policy/cron code remains reviewable.
 
 ## What this is
 A Next.js app where a member **authorizes once at joining** (Privy delegated actions consent screen) and then contributes every week **without touching their phone**. The backend moves funds server-side via a delegated signer, constrained by an enforceable policy.
