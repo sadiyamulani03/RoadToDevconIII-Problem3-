@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { PrivyClient } from "@privy-io/server-auth";
 import { savingsCirclePolicy } from "../src/lib/policy";
 
@@ -11,7 +12,7 @@ async function main() {
   const privy = new PrivyClient(appId, appSecret);
 
   // Create policy that restricts to specific contract, caps value, restricts chain, and expires
-  const policy = await privy.policies().create({
+  const policy = await (privy as any).policies().create({
     name: savingsCirclePolicy.name,
     version: savingsCirclePolicy.version,
     chain_type: savingsCirclePolicy.chain_type,

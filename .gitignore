@@ -9,3 +9,4 @@ dist/
 .netlify
 data/contributions.json
 .DS_Store
+next-env.d.ts

@@ -1,6 +1,8 @@
 import "./globals.css";
 import Providers from "./providers";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Meera's Savings Circle - Authorize Once",
   description: "Eleven colleagues, weekly contributions, no chasing required",
