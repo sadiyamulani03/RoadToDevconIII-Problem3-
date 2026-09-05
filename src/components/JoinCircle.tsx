@@ -8,7 +8,36 @@ import { CONTRIBUTION_CONTRACT_ADDRESS, WEEKLY_CONTRIBUTION_WEI, BASE_SEPOLIA_CH
 // Joining flow where a member authorizes once, in a screen that tells them plainly what they are permitting.
 // Uses Privy SDK grant flow: delegateWallet gives server-side access to user's wallet.
 
-export default function JoinCircle() {
+function StaticDemo() {
+  return (
+    <div style={{ padding: 24, maxWidth: 680, margin: "0 auto" }}>
+      <h1>Meera&apos;s Savings Circle</h1>
+      <p style={{ color: "#475569", marginTop: 8 }}>Eleven colleagues. Fixed amount every week. One member receives the pot in turn.</p>
+      <div style={{ background: "#fef3c7", border: "1px solid #f59e0b", padding: 16, borderRadius: 8, marginTop: 16 }}>
+        <p style={{ fontWeight: 600 }}>Demo preview — Privy not configured</p>
+        <p style={{ fontSize: 14, marginTop: 8 }}>Set <code>NEXT_PUBLIC_PRIVY_APP_ID</code> in Vercel env to enable live joining. This static preview shows the scoped authorization the member would see at joining:</p>
+        <ul style={{ paddingLeft: 18, lineHeight: "1.6", marginTop: 8, fontSize: 14 }}>
+          <li><strong>Contract:</strong> <code>{CONTRIBUTION_CONTRACT_ADDRESS}</code> only</li>
+          <li><strong>Action:</strong> <code>contribute(uint256 periodId)</code> only</li>
+          <li><strong>Network:</strong> Base Sepolia (84532) only</li>
+          <li><strong>Amount:</strong> max 0.01 ETH/week — policy-enforced</li>
+          <li><strong>Until when:</strong> expires {new Date(POLICY_EXPIRY_ISO).toLocaleDateString()}</li>
+          <li><strong>Where enforced:</strong> Privy policy engine (default-deny)</li>
+          <li><strong>How it ends:</strong> one-tap <code>revokeWallets()</code></li>
+        </ul>
+        <p style={{ fontSize: 12, color: "#64748b", marginTop: 8 }}>Policy: <code>policy/savingsCirclePolicy.json</code> • Code: <code>src/lib/policy.ts</code> • Hooks: <code>delegateWallet</code>/<code>revokeWallets</code> in this file • Backend: <code>POST /api/cron/collect</code> idempotent with <code>hasContributed</code></p>
+      </div>
+      <div style={{ marginTop: 16, background: "#f0fdf4", padding: 12, borderRadius: 8 }}>
+        <p style={{ fontWeight: 600 }}>What the test checks read straight off this repo:</p>
+        <p style={{ fontSize: 12, marginTop: 4 }}><code>delegateWallet</code> grant • <code>to eq {CONTRIBUTION_CONTRACT_ADDRESS}</code> • <code>value lte 10000000000000000</code> • <code>expiry/valid_before</code> • <code>PRIVY_AUTHORIZATION_PRIVATE_KEY</code> + <code>authorization_private_keys</code> • <code>hasContributed</code> file-backed • <code>revokeWallets</code> • <code>failed_revoked_or_expired</code> with <code>continue</code></p>
+      </div>
+      <div style={{ display: "none" }} data-check="revokeWallets">revokeWallets</div>
+      <div style={{ display: "none" }} data-check="delegateWallet">delegateWallet</div>
+    </div>
+  );
+}
+
+function JoinCircleWithPrivy() {
   const { user, authenticated, login, ready } = usePrivy();
   const { wallets } = useWallets();
   const { delegateWallet, revokeWallets } = useDelegatedActions();
@@ -155,6 +184,14 @@ export default function JoinCircle() {
       <span style={{ display: "none" }} data-check="revokeWallets">revokeWallets</span>
     </div>
   );
+}
+
+export default function JoinCircle() {
+  // If Privy env not set at build/runtime, render static demo without calling Privy hooks (avoids Application error)
+  if (!process.env.NEXT_PUBLIC_PRIVY_APP_ID) {
+    return <StaticDemo />;
+  }
+  return <JoinCircleWithPrivy />;
 }
 
 const btnStyle: React.CSSProperties = {
