@@ -1,0 +1,28 @@
+{
+  "name": "meera-savings-circle",
+  "version": "1.0.0",
+  "description": "Authorize Once, Then Stop Asking - Meera's savings circle with delegated wallet access",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@privy-io/react-auth": "^2.15.0",
+    "@privy-io/server-auth": "^1.20.0",
+    "next": "15.3.6",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "viem": "^2.31.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.14",
+    "typescript": "5.7.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

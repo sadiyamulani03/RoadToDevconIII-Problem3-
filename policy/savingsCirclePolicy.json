@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "name": "Meera Savings Circle - Weekly Contribution",
+  "chain_type": "ethereum",
+  "description": "Scoped, revocable server-side access for weekly savings circle contributions on Base Sepolia",
+  "expiry": "2027-09-04T00:00:00Z",
+  "expiresAt": 1820697600000,
+  "valid_before": 1820697600,
+  "rules": [
+    {
+      "name": "Allow only contribution contract - SavingsCircle on Base Sepolia",
+      "method": "eth_sendTransaction",
+      "action": "ALLOW",
+      "conditions": [
+        {
+          "field_source": "ethereum_transaction",
+          "field": "to",
+          "operator": "eq",
+          "value": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+        },
+        {
+          "field_source": "ethereum_transaction",
+          "field": "chain_id",
+          "operator": "eq",
+          "value": "84532"
+        }
+      ]
+    },
+    {
+      "name": "Cap weekly contribution - max 0.01 ETH",
+      "method": "eth_sendTransaction",
+      "action": "ALLOW",
+      "conditions": [
+        {
+          "field_source": "ethereum_transaction",
+          "field": "value",
+          "operator": "lte",
+          "value": "10000000000000000"
+        },
+        {
+          "field_source": "ethereum_transaction",
+          "field": "value",
+          "operator": "lte",
+          "value": "0x2386F26FC10000"
+        }
+      ]
+    },
+    {
+      "name": "Restrict to contribute function only",
+      "method": "eth_sendTransaction",
+      "action": "ALLOW",
+      "conditions": [
+        {
+          "field_source": "ethereum_calldata",
+          "field": "function_name",
+          "operator": "eq",
+          "value": "contribute",
+          "abi": [
+            {
+              "name": "contribute",
+              "type": "function",
+              "stateMutability": "payable",
+              "inputs": [{ "name": "periodId", "type": "uint256" }],
+              "outputs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Deny all other destinations - default deny",
+      "method": "eth_sendTransaction",
+      "action": "DENY",
+      "conditions": []
+    }
+  ]
+}
