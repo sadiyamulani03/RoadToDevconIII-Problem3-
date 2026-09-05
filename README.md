@@ -3,7 +3,8 @@
 Eleven colleagues. Fixed amount on the same day each week. One member receives the pot in turn. Weekly collection runs while members are offline, app closed, phone off.
 
 ## Live Demo
-<!-- Add Netlify/Vercel URL after deploy -->
+🌐 **Deployed (Vercel):** https://road-to-devcon-iii-problem3-o44xrsnrc-sadiyamulani03s-projects.vercel.app
+> Production deployment for `0f5407f` — auto-deploys on `main`. Latest successful build after fixing `scripts/createPolicy.ts` type error. Vercel dashboard shows `Production` `success` at that URL (see GitHub Deployments).
 
 ## What this is
 A Next.js app where a member **authorizes once at joining** (Privy delegated actions consent screen) and then contributes every week **without touching their phone**. The backend moves funds server-side via a delegated signer, constrained by an enforceable policy.
