@@ -4,7 +4,9 @@ Eleven colleagues. Fixed amount on the same day each week. One member receives t
 
 ## Live Demo
 🌐 **Deployed (Vercel):** https://road-to-devcon-iii-problem3-o44xrsnrc-sadiyamulani03s-projects.vercel.app
-> Production deployment for `0f5407f` — auto-deploys on `main`. Latest successful build after fixing `scripts/createPolicy.ts` type error. Vercel dashboard shows `Production` `success` at that URL (see GitHub Deployments).
+> Production deployment for `0f5407f` / `5d00cfb` — auto-deploys on `main`. If you see Vercel login, disable **Deployment Protection** in Vercel → Project → Settings → Deployment Protection → Vercel Authentication (set to off) to make the demo public. Latest build fixes the previous `Application error: client-side exception` (missing `NEXT_PUBLIC_PRIVY_APP_ID` now shows a friendly banner via `ErrorBoundary` instead of crashing).
+>
+> **Vercel env vars required for full joining:** `NEXT_PUBLIC_PRIVY_APP_ID`, `PRIVY_APP_SECRET`, `PRIVY_AUTHORIZATION_PRIVATE_KEY` / `PRIVY_AUTHORIZATION_KEY_ID`, `NEXT_PUBLIC_CONTRIBUTION_CONTRACT`, `NEXT_PUBLIC_BASE_SEPOLIA_RPC`. Copy from `.env.example` → Vercel → Settings → Environment Variables and redeploy. Without them the app shows a non-crashing banner and policy/cron code remains reviewable.
 
 ## What this is
 A Next.js app where a member **authorizes once at joining** (Privy delegated actions consent screen) and then contributes every week **without touching their phone**. The backend moves funds server-side via a delegated signer, constrained by an enforceable policy.
