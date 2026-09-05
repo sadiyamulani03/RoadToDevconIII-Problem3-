@@ -3,8 +3,8 @@
 Eleven colleagues. Fixed amount on the same day each week. One member receives the pot in turn. Weekly collection runs while members are offline, app closed, phone off.
 
 ## Live Demo
-🌐 **Deployed (Vercel):** https://road-to-devcon-iii-problem3-o44xrsnrc-sadiyamulani03s-projects.vercel.app
-> Production deployment for `0f5407f` / `5d00cfb` — auto-deploys on `main`. If you see Vercel login, disable **Deployment Protection** in Vercel → Project → Settings → Deployment Protection → Vercel Authentication (set to off) to make the demo public. Latest build fixes the previous `Application error: client-side exception` (missing `NEXT_PUBLIC_PRIVY_APP_ID` now shows a friendly banner via `ErrorBoundary` instead of crashing).
+🌐 **Deployed (Vercel):** https://road-to-devcon-iii-problem3-41i41lts4-sadiyamulani03s-projects.vercel.app
+> Latest production (`a492b7e`) — auto-deploys on `main`. Redeployed now: previous `Application error: client-side exception` is fixed (`5d00cfb` adds `ErrorBoundary` + fallback banner for missing `NEXT_PUBLIC_PRIVY_APP_ID`). Earlier `o44xrsnrc` (`0f5407f`) was valid, new `41i41lts4` (`a492b7e`) is current. If you see Vercel login, disable **Deployment Protection** in Vercel → Project → Settings → Deployment Protection → Vercel Authentication (off) to make demo public.
 >
 > **Vercel env vars required for full joining:** `NEXT_PUBLIC_PRIVY_APP_ID`, `PRIVY_APP_SECRET`, `PRIVY_AUTHORIZATION_PRIVATE_KEY` / `PRIVY_AUTHORIZATION_KEY_ID`, `NEXT_PUBLIC_CONTRIBUTION_CONTRACT`, `NEXT_PUBLIC_BASE_SEPOLIA_RPC`. Copy from `.env.example` → Vercel → Settings → Environment Variables and redeploy. Without them the app shows a non-crashing banner and policy/cron code remains reviewable.
 
